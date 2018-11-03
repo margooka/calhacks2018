@@ -4,7 +4,7 @@ we will ~~win~~ try our best at cal hacks
 
 > I still remember that one time josh checked if a number was an integer in python by using a try except block
 
-###A Poem
+### A Poem ###
 ```
 Once upon a midnight dreary, while I pondered, weak and weary,
 Over many a quaint and curious volume of forgotten lore—
