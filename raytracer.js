@@ -98,11 +98,11 @@ function normalize (v) {
     return scale_r3(1 / Math.sqrt(dot_product(v, v)), v);
 }
 
-function draw () {
+function draw (x, y, z, theta) {
     let ctx = canvas.getContext('2d');
     let r3_bunny = translate_vertices(scale_vertices(1, bunny_vertices, scale_r3), [0.15, -0.1, 0], add_r3)
     let r2_bunny = project_vertices(r3_bunny,
-                                    [0, -1, 0],
+                                    [x, y, z],
                                     normalize([1, 0, 0]));
     console.log(r3_bunny[1]);
     console.log(r2_bunny[1]);
@@ -111,10 +111,25 @@ function draw () {
     return ctx;
 }
 
-var ctx = draw();
+var ctx = draw(0, -1, 0, 0);
 
 function clear () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
+
+let x_slider = document.getElementById("x_range");
+let y_slider = document.getElementById("y_range");
+let z_slider = document.getElementById("z_range");
+let theta_slider = document.getElementById("theta_range");
+
+x_slider.oninput = function () {
+    clear();
+    console.log(x_slider.value);
+    draw(x_slider.value / 10, y_slider.value / 10, z_slider.value / 10, theta_slider.value / 10);
+}
+
+y_slider.oninput = x_slider.oninput;
+z_slider.oninput = x_slider.oninput;
+theta_slider.oninput = x_slider.oninput;
 
 alert("updated");
