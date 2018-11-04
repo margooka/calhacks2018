@@ -100,12 +100,10 @@ function normalize (v) {
 
 function draw (x, y, z, theta) {
     let ctx = canvas.getContext('2d');
-    let r3_bunny = translate_vertices(scale_vertices(1, bunny_vertices, scale_r3), [0.15, -0.1, 0], add_r3)
+    let r3_bunny = translate_vertices(scale_vertices(1, bunny_vertices, scale_r3), [x, y, z], add_r3)
     let r2_bunny = project_vertices(r3_bunny,
-                                    [x, y, z],
-                                    normalize([1, 0, 0]));
-    console.log(r3_bunny[1]);
-    console.log(r2_bunny[1]);
+                                    normalize([0, -1, 0]),
+                                    normalize([Math.cos(theta), 0, Math.sin(theta)]));
     let screen_bunny = translate_vertices(scale_vertices(100, r2_bunny, scale_r2c), [canvas.width / 2, canvas.height / 2, 0], add_r3);
     draw_object(ctx, bunny_faces, screen_bunny);
     return ctx;
@@ -125,7 +123,7 @@ let theta_slider = document.getElementById("theta_range");
 x_slider.oninput = function () {
     clear();
     console.log(x_slider.value);
-    draw(x_slider.value / 10, y_slider.value / 10, z_slider.value / 10, theta_slider.value / 10);
+    draw(x_slider.value / 1000, y_slider.value / 1000, z_slider.value / 1000, theta_slider.value / 20);
 }
 
 y_slider.oninput = x_slider.oninput;
