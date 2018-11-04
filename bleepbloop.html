@@ -2,22 +2,117 @@
 <!-- I will try my best! -->
 <html>
 <style>
-div {
-    height: 100%;
-	background: radial-gradient(circle, rgba(108,180,58,1) 0%, rgba(43,29,253,1) 50%, rgba(252,69,69,1) 100%) fixed;
-}
-.help {cursor: help;}
+	div {
+    	height: 100%;
+		background: radial-gradient(circle, rgba(108,180,58,1) 0%, rgba(43,29,253,1) 50%, rgba(252,69,69,1) 100%) fixed;
+	}
+	.curs {
+  		cursor: url(http://cur.cursors-4u.net/toons/too-1/too65.cur), auto;
+	}
+	.slidecontainer {
+    	width: 50%;
+	}
+	.slider {
+	    -webkit-appearance: none;
+	    width: 100%;
+	    height: 25px;
+	    background: #d3d3d3;
+	    outline: none;
+	    opacity: 0.7;
+	    -webkit-transition: .2s;
+	    transition: opacity .2s;
+	}
+	.slider:hover {
+    	opacity: 1;
+	}
+
+	.slider::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    width: 25px;
+	    height: 25px;
+	    background: #4CAF50;
+	    cursor: pointer;
+	}
+
+	.slider::-moz-range-thumb {
+	    width: 25px;
+	    height: 25px;
+	    background: #4CAF50;
+	    cursor: pointer;
+	}
 </style>
 
 <body>
-
 	<div>
 
 	<h1 style="text-align:center;font-family:courier;">We will win</h1>
-	<p style="color:red;font-size:100px;text-align:right;"; class="help">CAL HACKS</p>
+	<p style="color:red;font-size:100px;text-align:right;"; class="curs">CAL HACKS</p>
+	
+    <!--
+	<input type="number" id="X" value=50></input>
+	<input type="number" id="Y" value=50></input>
+    -->
+	<!-- <input type="number" id="rotation" value=0></input> -->
 
+	<!-- <script type="text/javascript">
+		function myKeyPress(e){
+			// a = 97
+			// w = 119
+			// s = 115
+			// d = 100
+
+			//arbitrary max = 100
+    		var x = document.getElementById("X");
+    		var y = document.getElementById("Y");
+    		var rotation = document.getElementById("rotation");
+
+    		if(window.event) { // IE                    
+      			if (e.keyCode == 97 && document.getElementById("X").value !== "0") {
+      				document.getElementById("X").value = parseInt(document.getElementById("X").value) - 1; 
+      			}
+      			if (e.keyCode == 119 && document.getElementById("X").value !== "100") {
+      				document.getElementById("X").value = parseInt(document.getElementById("X").value) + 1;
+      			}
+      			if (e.keyCode == 115 && document.getElementById("X").value !== "0") {
+      				document.getElementById("Y").value = parseInt(document.getElementById("X").value) - 1;
+      			}
+      			if (e.keyCode == 100 && document.getElementById("X").value !== "100") {
+      				document.getElementById("Y").value = parseInt(document.getElementById("X").value) + 1;
+      			}
+    		} else if(e.which){ // Netscape/Firefox/Opera                   
+      			if (e.which == 97 && document.getElementById("X").value !== "0") {
+      				document.getElementById("X").value = parseInt(document.getElementById("X").value) - 1; 
+      			}
+      			if (e.which == 119 && document.getElementById("X").value !== "100") {
+      				document.getElementById("X").value = parseInt(document.getElementById("X").value) + 1;
+      			}
+      			if (e.which == 115 && document.getElementById("X").value !== "0") {
+      				document.getElementById("Y").value = parseInt(document.getElementById("X").value) - 1;
+      			}
+      			if (e.which == 100 && document.getElementById("X").value !== "100") {
+      				document.getElementById("Y").value = parseInt(document.getElementById("X").value) + 1;
+      			}
+    		}
+    		alert();
+  		}
+	</script> 
+	-->
+	<div class="slidecontainer">
+	  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+	  <p>Value: <span id="demo"></span></p>
 	</div>
 
+	<script>
+	var slider = document.getElementById("myRange");
+	var output = document.getElementById("demo");
+	output.innerHTML = slider.value;
+
+	slider.oninput = function() {
+	  output.innerHTML = this.value;
+	}
+	</script>
+	</div>
 
 </body>
 </html>
