@@ -52,14 +52,14 @@ function draw_triangle (ctx, p1, p2, p3, pcolor)
     ctx.moveTo(p1[0], p1[1]);
     ctx.lineTo(p2[0], p2[1]);
     ctx.lineTo(p3[0], p3[1]);
-    let alpha = pcolor[2] / 100000;
+    let alpha = pcolor[2] * 20;
     if (alpha < 0) {
         alpha = 0;
     }
     else {
         alpha = Math.pow(2, -alpha);
     }
-    ctx.fillStyle = 'rgba(255,0,0,' + '1' + ')';
+    ctx.fillStyle = 'rgba(255,0,0,' + alpha + ')';
     ctx.fill();
 }
 
@@ -82,7 +82,7 @@ function scale_r2 (c, x) {
     return [c * x[0], c * x[1]];
 }
 
-function scale_r2c (c , x) {
+function scale_r2c (c, x) {
     return [c * x[0], c * x[1], x[2]];
 }
 
@@ -94,15 +94,19 @@ function scale_vertices (c, vertices, scale_func) {
     return new_vertices;
 }
 
+function normalize (v) {
+    return scale_r3(1 / Math.sqrt(dot_product(v, v)), v);
+}
+
 function draw () {
     let ctx = canvas.getContext('2d');
-    let r3_bunny = translate_vertices(scale_vertices(10, bunny_vertices, scale_r3), [0, 1, 0], add_r3)
+    let r3_bunny = translate_vertices(scale_vertices(1, bunny_vertices, scale_r3), [0.15, -0.1, 0], add_r3)
     let r2_bunny = project_vertices(r3_bunny,
-                                    [0, 0, 1],
-                                    [0, 1, 0]);
+                                    [0, -1, 0],
+                                    normalize([1, 0, 0]));
     console.log(r3_bunny[1]);
     console.log(r2_bunny[1]);
-    let screen_bunny = translate_vertices(scale_vertices(1, r2_bunny, scale_r2c), [canvas.width / 2, canvas.height / 2, 0], add_r3);
+    let screen_bunny = translate_vertices(scale_vertices(100, r2_bunny, scale_r2c), [canvas.width / 2, canvas.height / 2, 0], add_r3);
     draw_object(ctx, bunny_faces, screen_bunny);
     return ctx;
 }
